@@ -13,10 +13,13 @@
         <div class="container">
             <h2>Добавить студента</h2>
             <form class="add-stud" id="add-student" action="">
-                <input type="text" placeholder="Ф.И.">
-                <input type="date" name="" id="">
-                <input type="text" placeholder="Дата поступления">
-                <input type="text" placeholder="Факультет">
+                <div class="inputs">
+                    <input type="text" data-column="name" placeholder="И.Ф.">
+                    <input type="date" data-column="birthday" name="" id="">
+                    <input type="text" data-column="start" placeholder="Дата поступления">
+                    <input type="text" data-column="faculty" placeholder="Факультет">
+                </div>
+                
                 <button type="submit">Добавить</button>
             </form>
         </div>

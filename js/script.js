@@ -2,6 +2,10 @@ const body = document.body;
 const tbody = document.getElementById("tbody");
 let dir = true;
 
+let addForm = document.getElementById("add-student");
+
+let type, placeholder, dataAttr;
+
 const BUTTONS = Array.from(document.getElementsByClassName("thead__btn"));
 
 let studentArray = [
@@ -49,32 +53,60 @@ let studentArray = [
   },
 ];
 
+addForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  let addInputs = Array.from(addForm.querySelectorAll("input"));
+  // let fun = addPerson(addInputs);
+  // console.log(fun);
+  studentArray.push(addPerson(addInputs));
+  render(studentArray)
+  addInputs.forEach(element => element.value = "")
+});
+
+function addPerson(array) {
+  let obj = {};
+  array.forEach((element) => {
+    dataAttr = element.dataset.column;
+    type = element.getAttribute("type");
+    placeholder = element.getAttribute("placeholder");
+
+    if (dataAttr == "name") {
+      let name = element.value.split(" ");
+      [obj.name, obj.surname] = name;
+    } else if (dataAttr == "birthday") {
+      obj[dataAttr] = new Date(element.value);
+    } else if (dataAttr) {
+      obj[dataAttr] = element.value;
+    }
+  });
+
+  return obj;
+}
+
 let filteredArray;
 
 const INPUTS = Array.from(document.getElementsByClassName("search__input"));
 
-console.log(typeof(studentArray[0].start))
+console.log(typeof studentArray[0].start);
 
 function searchStudent(keyWord, column) {
-    let filterArray = [];
+  let filterArray = [];
 
-    studentArray.forEach((e)=>{
-        if(column == "birthday"){
-            console.log(e[column]);
-            let age = String(diffDates(new Date(), new Date(e[column])));
-            if( age.substr(0, keyWord.length)==keyWord){
-                filterArray.push(e);
-            }
-        }
-        else if( String(e[column]).substr(0, keyWord.length)==keyWord){
-            // console.log(e);
-            filterArray.push(e);
-            // console.log(filterArray);
-        }
-    })
-    return filterArray
+  studentArray.forEach((e) => {
+    if (column == "birthday") {
+      console.log(e[column]);
+      let age = String(diffDates(new Date(), new Date(e[column])));
+      if (age.substr(0, keyWord.length) == keyWord) {
+        filterArray.push(e);
+      }
+    } else if (String(e[column]).substr(0, keyWord.length) == keyWord) {
+      // console.log(e);
+      filterArray.push(e);
+      // console.log(filterArray);
+    }
+  });
+  return filterArray;
 }
-
 
 // console.log(BUTTONS);
 BUTTONS.forEach(function (e) {
@@ -136,9 +168,9 @@ function render(array) {
 render(studentArray);
 
 INPUTS.forEach(function (e) {
-    e.addEventListener("input", function () {
-      // console.log(e.dataset.column);
-      filteredArray = searchStudent(e.value, e.dataset.column);
-      render(filteredArray);
-    });
+  e.addEventListener("input", function () {
+    // console.log(e.dataset.column);
+    filteredArray = searchStudent(e.value, e.dataset.column);
+    render(filteredArray);
   });
+});
