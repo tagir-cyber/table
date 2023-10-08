@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+    
+</head>
+<body>
+    <section class="add-form">
+        <div class="container">
+            <h2>Добавить студента</h2>
+            <form class="add-stud" id="add-student" action="">
+                <div class="inputs">
+                    <input type="text" data-column="name" placeholder="И.Ф.">
+                    <input type="date" data-column="birthday" name="" id="">
+                    <input type="text" data-column="start" placeholder="Дата поступления">
+                    <input type="text" data-column="faculty" placeholder="Факультет">
+                </div>
+                
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+    </section>
+
+    <form class="search" action="">
+        <h2>Поиск студента</h2>
+        <input class="search__input" type="text" data-column="name" placeholder="По имени">
+        <input class="search__input" type="text" data-column="birthday" placeholder="По возрасту">
+        <input class="search__input" type="text" data-column="start" placeholder="По дате поступления">
+        <input class="search__input" type="text" data-column="faculty" placeholder="По факультету">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <td><button class="thead__btn" data-column="name">ФИО</button></td>
+                <td><button class="thead__btn" data-column="birthday">Возраст</button></td>
+                <td><button class="thead__btn" data-column="start">Дата поступления</button></td>
+                <td><button class="thead__btn" data-column="faculty">Факультет</button></td>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            
+        </tbody>
+    </table>
+</body>
+</html>
